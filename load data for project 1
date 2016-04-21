@@ -1,0 +1,5 @@
+rm(list=ls()) #clear working directory
+
+setwd("~/Desktop/Coursera/Exploratory Data Analysis Course #4")
+
+data_full <- read.table("household_power_consumption.txt", header=T, sep=';', na.strings="?", nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"') #import table, remove "?" which are NA in this data set
