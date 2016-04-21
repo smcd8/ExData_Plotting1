@@ -3,6 +3,18 @@ frame()
 
 ## Plot 3
 
+## Getting full dataset
+data_full <- read.table("household_power_consumption.txt", header=T, sep=';', na.strings="?", nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"') #import table, remove "?" which are NA in this data set
+data_full$Date <- as.Date(data_full$Date, format="%d/%m/%Y")
+
+## Subsetting the data
+data <- subset(data_full, subset=(Date >= "2007-02-01" & Date <= "2007-02-02"))
+rm(data_full)
+
+## Converting dates
+datetime <- paste(as.Date(data$Date), data$Time)
+data$Datetime <- as.POSIXct(datetime)
+
 with(data, {
     plot(Sub_metering_1~Datetime, type="l",
          ylab="Global Active Power (kilowatts)", xlab="")
